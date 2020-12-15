@@ -1,0 +1,72 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "54321:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=rederly
+    volumes:
+      - "./.data/db:/var/lib/postgresql/data"
+  # uncomment this block to start pg_admin container if needed
+  # db_admin:
+  #   image: dpage/pgadmin4:4.29
+  #   ports:
+  #     - "8013:8013"
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=admin@example.com
+  #     - PGADMIN_DEFAULT_PASSWORD=password
+  #     - PGADMIN_LISTEN_PORT=8013
+  #   volumes:
+  #     - "./.data/db_admin:/var/lib/pgadmin"
+  renderer:
+    image: kitsook/rederly_renderer
+    ports:
+      - "3000:3000"
+    # volumes:
+    #   # edit this to override the problem library
+    #   - "./.data/renderer/webwork-open-problem-library:/usr/app/webwork-open-problem-library"
+  frontend:
+    image: kitsook/rederly_frontend
+    ports:
+      - "1800:80"
+    depends_on:
+      - backend
+    # volumes:
+    #   - "./deploy/frontend/nginx.conf:/etc/nginx/nginx.conf"
+  backend:
+    image: kitsook/rederly_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT=8080
+      - SERVER_BASE_PATH=/backend-api
+      - SERVER_LIMITER_WINDOW_LENGTH=60000
+      - SERVER_LIMITER_MAX_REQUESTS=100
+      - DB_HOST=db
+      - DB_NAME=rederly
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_LOGGING=
+      - EMAIL_ENABLED=false
+      - EMAIL_USER=sendgriduser
+      - EMAIL_KEY=sendgridpassword
+      - EMAIL_FROM=verifiedsendgridemail
+      - AUTH_SESSION_LIFE=24
+      - AUTH_COST_FACTOR=8
+      - AUTH_TOKEN_LIFE=1440
+      - AUTH_FORGOT_PASSWORD_TOKEN_LIFE=1440
+      - AUTH_VERIFY_INSTUTIONAL_EMAIL_TOKEN_LIFE=1440
+      - RENDERER_URL=http://renderer:3000
+      # - NODE_ENV='production'
+      - JIRA_EMAIL=
+      - JIRA_API_KEY=
+      # set DATA_PRELOAD to 1 to reset database with demo data
+      - DATA_PRELOAD=1
+    # volumes:
+    #   - "./deploy/backend/demo-db-preload.ts:/app/ts-built/demo-db-preload.ts"
+
