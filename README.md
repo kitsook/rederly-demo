@@ -30,6 +30,3 @@ Professor logins: `prof1@example.com`, `prof2@example.com`, ... etc
 Student logins: `student1@example.com`, `student2@example.com`, ... etc
 
 Same password for all logins: `letmein`
-
-## Known Issues
-- problems with embedded resources (e.g. pictures) are rendered OK with the renderer but not with the Question Editor.  Probably a configuration issue.

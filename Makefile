@@ -18,16 +18,15 @@ clone_renderer:
 	git clone https://github.com/rederly/renderer.git renderer
 
 ###
-build_all: build_frontend_img build_backend_img build_renderer_img tag_as_latest
+build_all: build_frontend_img build_backend_img build_renderer_img
 
 build_frontend_img:
 	cd frontend && git checkout "${FRONTEND_SRC_TAG}"
 	cp deploy/frontend/.dockerignore frontend/.dockerignore
 	cp deploy/frontend/Dockerfile frontend/Dockerfile
 	cp deploy/frontend/nginx.conf frontend/nginx.conf
-	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_frontend:${FRONTEND_SRC_TAG} frontend
-	$(eval IMG_ID = $(shell docker images ${CONTAINER_REGISTRY_NAME}/rederly_frontend:${FRONTEND_SRC_TAG} --format "{{.ID}}"))
-	docker tag $(IMG_ID) ${CONTAINER_REGISTRY_NAME}/rederly_frontend:latest
+	cp deploy/frontend/HomePage.tsx frontend/src/Home/HomePage.tsx
+	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_frontend:${FRONTEND_SRC_TAG} -t ${CONTAINER_REGISTRY_NAME}/rederly_frontend:latest frontend
 
 build_backend_img:
 	cd backend && git checkout "${BACKEND_SRC_TAG}"
@@ -36,9 +35,7 @@ build_backend_img:
 	cp deploy/backend/startup.sh backend/startup.sh
 	cp deploy/backend/demo-db-preload.ts backend/src/demo-db-preload.ts
 	cd backend && touch .env
-	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_backend:${BACKEND_SRC_TAG} backend
-	$(eval IMG_ID = $(shell docker images ${CONTAINER_REGISTRY_NAME}/rederly_backend:${BACKEND_SRC_TAG} --format "{{.ID}}"))
-	docker tag $(IMG_ID) ${CONTAINER_REGISTRY_NAME}/rederly_backend:latest
+	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_backend:${BACKEND_SRC_TAG} -t ${CONTAINER_REGISTRY_NAME}/rederly_backend:latest backend
 
 build_renderer_img:
 	cd renderer && git checkout "${RENDERER_SRC_TAG}"

@@ -10,6 +10,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=rederly
     volumes:
+      # mount db volume if you wanted to persist data
       - "./.data/db:/var/lib/postgresql/data"
   # uncomment this block to start pg_admin container if needed
   # db_admin:
@@ -39,6 +40,7 @@ services:
       - backend
     # volumes:
     #   - "./deploy/frontend/nginx.conf:/etc/nginx/nginx.conf"
+    #   - "./frontend/build:/app"
   backend:
     image: kitsook/rederly_backend
     container_name: backend
