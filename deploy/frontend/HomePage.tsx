@@ -70,9 +70,9 @@ export const HomePage: React.FC<HomePageProps> = () => {
                         <li>Professors: prof1@example.com, prof2@example.com, ..., prof10@example.com</li>
                         <li>Students: student1@example.com, student2@example.com, ..., student600@example.com</li>
                     </ul>
-                    <p>All logins use the same password <mark>letmein</mark></p>
+                    <p>All with the same password <mark>letmein</mark></p>
                     <h5>Open Problem Library</h5>
-                    <p>A copy of the Open Problem Library is included. When editing a question, you may find library templates under the directory "Library/". Refer to the <a href="https://github.com/openwebwork/webwork-open-problem-library" target="_blank" rel="noopener noreferrer">Open Problem Library</a> for the folder structure and file name.</p>
+                    <p>A copy of Open Problem Library is included. When using Problem Editor, you may load Library templates from the directory "Library/". (e.g. to load "UBC/MATH/MATH105/LMindifference.pg" from Open Problem Library, input "Library/UBC/MATH/MATH105/LMindifference.pg"). Refer to the <a href="https://github.com/openwebwork/webwork-open-problem-library/tree/master/OpenProblemLibrary" target="_blank" rel="noopener noreferrer">Open Problem Library</a> for folder structure and available templates.</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='primary' onClick={handleCloseDemoDialog}>Close</Button>
