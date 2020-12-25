@@ -1,5 +1,7 @@
-
-# To run this script, your Azure Automation Account needs to has the "AzureRM.Websites" module installed.
+# Script to restart App Service on Azure. If the db is not using persistent storage, it will effectively
+# reset the db if demo data is also set up to preload during startup.
+#
+# To run this script with Azure Automation Account, it needs to has the "AzureRM.Websites" module installed.
 # The easiest way to do this is go to PowerShell Gallery at https://www.powershellgallery.com/packages/AzureRM.Websites/5.2.0 ,
 # open the tab "Azure Automation" and clik "Deploy to Azure Automation" button
 #

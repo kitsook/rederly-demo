@@ -63,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <p>This is <b>not</b> the offical Rederly demo site. For more information about Rederly, please visit their <a href="https://rederly.com" target="_blank" rel="noopener noreferrer">web site</a>.</p>
-                    <p>The purpose of this site is to explore functionalities provided by Rederly. Some logins and courses have been preloaded and <b>all data will be reset everyday at 3am PT</b>. Do not enter any sensitive data to this site.</p>
+                    <p>The purpose of this site is to explore functionalities provided by Rederly. Some logins and courses have been preloaded and <b>all data will be reset everyday at 4am PT</b>. Do not enter any sensitive data to this site.</p>
                     <br />
                     <h5>Logins</h5>
                     <ul>
@@ -76,6 +76,9 @@ export const HomePage: React.FC<HomePageProps> = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='primary' onClick={handleCloseDemoDialog}>Close</Button>
+                    <Container className="text-left">
+                        <p><small><em><a href="https://github.com/kitsook/rederly-demo" target="_blank">Scripts</a> for deploying your own demo stack.</em></small></p>
+                    </Container>
                 </Modal.Footer>
             </Modal>
         </>
