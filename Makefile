@@ -1,6 +1,6 @@
 FRONTEND_SRC_TAG=v1.6.1
 BACKEND_SRC_TAG=v1.6.2
-RENDERER_SRC_TAG=master
+RENDERER_SRC_TAG=v1.2.1
 CONTAINER_REGISTRY_NAME=kitsook
 
 init: clone_all build_all
@@ -40,7 +40,7 @@ build_backend_img:
 build_renderer_img:
 	cd renderer && git checkout "${RENDERER_SRC_TAG}"
 	cp deploy/renderer/Dockerfile renderer/Dockerfile
-	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_renderer renderer
+	docker build -t ${CONTAINER_REGISTRY_NAME}/rederly_renderer:${RENDERER_SRC_TAG} -t ${CONTAINER_REGISTRY_NAME}/rederly_renderer:latest renderer
 
 ###
 push_images:
@@ -48,4 +48,5 @@ push_images:
 	docker push ${CONTAINER_REGISTRY_NAME}/rederly_frontend:latest
 	docker push ${CONTAINER_REGISTRY_NAME}/rederly_backend:$(BACKEND_SRC_TAG)
 	docker push ${CONTAINER_REGISTRY_NAME}/rederly_backend:latest
+	docker push ${CONTAINER_REGISTRY_NAME}/rederly_renderer:$(RENDERER_SRC_TAG)
 	docker push ${CONTAINER_REGISTRY_NAME}/rederly_renderer:latest

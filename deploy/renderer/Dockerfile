@@ -1,10 +1,11 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 ARG PORT_NUM=3000
 ENV PORT_NUM=${PORT_NUM}
 
 MAINTAINER Rederly
 
 WORKDIR /usr/app
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
@@ -28,9 +29,9 @@ RUN apt-get update \
     libclass-accessor-perl \
     libstring-shellquote-perl \
     libproc-processtable-perl \
+    libmath-random-secure-perl \
     libdata-structure-util-perl \
     liblocale-maketext-lexicon-perl \
-    gettext-base \
     && apt-get clean \
     && rm -fr /var/lib/apt/lists/* /tmp/*
 
