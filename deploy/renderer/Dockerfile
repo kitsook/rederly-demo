@@ -44,7 +44,7 @@ COPY . .
 
 RUN cp render_app.conf.dist render_app.conf
 
-RUN git clone --single-branch --branch PG-2.15 --depth 1 https://github.com/openwebwork/pg.git lib/PG
+RUN git clone --single-branch --branch master --depth 1 https://github.com/openwebwork/pg.git lib/PG
 RUN git clone --single-branch --branch master --depth 1 https://github.com/openwebwork/webwork-open-problem-library.git /usr/app/webwork-open-problem-library
 
 EXPOSE ${PORT_NUM}
