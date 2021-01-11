@@ -4,6 +4,8 @@
 
 **Note that this is not an offical project of Rederly.**  These scripts simply pull the [source code](https://github.com/rederly/), build the Docker images, and preload some demo data into the database.
 
+A copy of this demo is running on Azure: [https://rederly-demo.azurewebsites.net/](https://rederly-demo.azurewebsites.net/)
+
 
 ## Quick Start
 Assuming you have Docker environment setup already:
